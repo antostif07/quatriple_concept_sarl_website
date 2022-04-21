@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {makeStyles} from "@mui/styles";
 import {colors} from "../../var/colors";
 import {sliders} from "../../var/sliders";
@@ -30,6 +30,7 @@ const useStyles = makeStyles({
         justifyContent: "center",
         alignItems: "center",
         cursor: 'pointer',
+        zIndex: -3000,
         transition: "all .4s ease-out",
         "&.left": {
             transform: "translate(25px, 36px)",
@@ -59,6 +60,7 @@ const useStyles = makeStyles({
         width: "100%",
         height: "100%",
         "& .slide": {
+            opacity: 0,
             height: "100%",
             width: "100%",
             display: "flex",
@@ -66,7 +68,11 @@ const useStyles = makeStyles({
             justifyContent: "center",
             alignItems: "center",
             color: "#fff",
-            position: "relative",
+            position: "absolute",
+            transition: "opacity 0.8s ease-in-out",
+            '&.active': {
+                opacity: 1,
+            },
             "&:before": {
                 content: "''",
                 width: "100%",
@@ -103,18 +109,33 @@ const useStyles = makeStyles({
 
 export const MainSlider = () => {
     const classes = useStyles()
+    const [activeSlide, setActiveSlide] = useState(0)
 
+    const changeSlider = (toSelected) => {
+        const newSlide = activeSlide + toSelected
+
+        setActiveSlide(newSlide)
+    }
     useEffect(() => {
+        const sliderInterval = setInterval(() => {
+            if (activeSlide + 1 === sliders.length) {
+                setActiveSlide(0)
+            } else {
+                const newSlide = activeSlide + 1
+                setActiveSlide(newSlide)
+            }
+        }, 6000)
 
-    }, [])
+        return () => clearInterval(sliderInterval)
+    }, [activeSlide])
 
     return (
         <div className={classes.root}>
             <div style={{position: "absolute", height: "100%", width: "100%"}}>
-                <div className={classes.arrow + " left"}>
+                <div className={classes.arrow + " left"} onClick={() => changeSlider(1)}>
                     <span className={"ti-arrow-left icon"} />
                 </div>
-                <div className={classes.arrow + " right"}>
+                <div className={classes.arrow + " right"} onClick={() => changeSlider(-1)}>
                     <span className={"ti-arrow-right icon"} />
                 </div>
             </div>
@@ -122,7 +143,7 @@ export const MainSlider = () => {
                 {
                     sliders.map((slider, i) => (
                         <div
-                            className={'slide'} key={i}
+                            className={`slide ${activeSlide === i ? 'active' : ''}`} key={i}
                             style={{backgroundImage: `url(${slider.imageBg})`, backgroundSize: "cover", }}
                         >
                             <Container>

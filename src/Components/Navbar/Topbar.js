@@ -3,6 +3,8 @@ import {makeStyles} from "@mui/styles";
 import Grid from "@mui/material/Grid";
 import {colors} from "../../var/colors";
 import {Infos} from "../Infos";
+import {MenuItem, MenuList} from "@mui/material";
+import Menu from "@mui/material/Menu";
 
 
 const useStyles = makeStyles({
@@ -95,7 +97,12 @@ export const Topbar = () => {
                             <Grid item style={{height: "100%"}}>
                                 <Grid container style={{height: "100%"}} className={classes.lang + " alignItemsCenter"}>
                                     <Grid item>
-                                        Français
+                                        <Menu>
+                                            <MenuList>
+                                                <MenuItem>Français</MenuItem>
+                                                <MenuItem>Anglais</MenuItem>
+                                            </MenuList>
+                                        </Menu>
                                     </Grid>
                                 </Grid>
                             </Grid>

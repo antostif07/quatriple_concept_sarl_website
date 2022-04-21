@@ -55,7 +55,7 @@ export const ServiceCard = (props) => {
                 <img src={props.imgLogo}  alt={props.title}/>
                 <h5 className={classes.title}>{props.title}</h5>
                 <div className={classes.line + ' line'} />
-                {props.description}
+                <p>{props.description}</p>
             </Link>
         </div>
     )

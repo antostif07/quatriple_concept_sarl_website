@@ -21,7 +21,7 @@ export const SectionTitle = props => {
     const classes = useStyles()
 
     return (
-        <h2 className={classes.sectionTitle} style={{color: props.firstColor}}>
+        <h2 className={classes.sectionTitle} style={{color: props.firstColor, ...props.style}} >
             {props.titleFirst} <span className={"secondary"} style={{color: props.secondaryColor}}>{props.titleSecondary}</span>
         </h2>
     )
@@ -32,4 +32,5 @@ SectionTitle.propTypes = {
     titleFirst: PropTypes.node.isRequired,
     secondaryColor: PropTypes.string,
     titleSecondary: PropTypes.node,
+    style: PropTypes.object,
 }

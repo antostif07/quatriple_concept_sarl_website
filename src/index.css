@@ -7,6 +7,9 @@
     src: url("assets/fonts/Satisfy-Regular.ttf");
 }
 
+* {
+    line-height: 1;
+}
 body {
     font-family: Poppins,sans-serif;
     font-size: 14px;
@@ -168,4 +171,7 @@ img {
 }
 section {
     padding: 72px 0;
+}
+p {
+    line-height: 1;
 }

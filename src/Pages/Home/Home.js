@@ -8,6 +8,7 @@ import {SectionTitle} from "../../Components/SectionTitle/SectionTitle";
 import {colors} from "../../var/colors";
 import {GoalCard} from "../AboutUs/Goals";
 import {ServiceSection} from "../Service/Services";
+import {Choices} from "./Choices";
 
 const processes = [
     {
@@ -34,6 +35,9 @@ export const Home = () => {
     return (
         <div className={classes.root}>
             <MainSlider />
+            <section style={{background: colors.yellow,}}>
+                <Choices />
+            </section>
             <AboutUsResume />
             <section>
                 <Container>
